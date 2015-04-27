@@ -9,7 +9,9 @@
     <div class="large-3 columns left">
         <img src="{{user.avatar(120)}}"/>
         {% if not current_user.is_following(user) %}
-        <h3><a href="{{url_for('follow', nickname=user.nickname)}}">Follow</a></h3>
+        <h4><a href="{{url_for('follow', nickname=user.nickname)}}">Follow</a></h4>
+        {% elif not current_user.id == user.id %}
+        <h4><a href="{{url_for('unfollow', nickname=user.nickname)}}">Unfollow</a></h4>
         {% endif %}
     </div>
     <div class="large-9 columns left">
