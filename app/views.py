@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from app import app, db, lm
-from forms import LoginForm, EditForm, PostForm
+from forms import EditForm, PostForm
 from models import User, ROLE_USER, ROLE_ADMIN, Post
 from config import POSTS_PER_PAGE
 from datetime import datetime
