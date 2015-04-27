@@ -1,0 +1,28 @@
+<div class="row">
+<div class="large-2 columns small-3">
+    <img src="{{post.author.avatar(120)}}"/>
+    {% with time = post.timestamp.ctime().split(' ') %}
+    <h5>
+    <small>
+        {{time[1]}} {{time[2]}} {{time[3][:-3]}}
+    </small>
+    </h5>
+    {% endwith %}
+</div>
+<div class="large-9 columns">
+    <p>
+        <a href="{{url_for('user', nickname=post.author.nickname)}}">
+        <strong>{{post.author.nickname}}:</strong>
+        </a>
+        {{post.body}}
+    </p>
+</div>
+<div class="large-1 columns">
+    {% if current_user.id == post.author.id %}
+    <a href="{{ url_for('delete_post', post_id = post.id) }}">
+        <i class="fa fa-times"></i>
+    </a>
+    {% endif %}
+</div>
+</div>
+<br>

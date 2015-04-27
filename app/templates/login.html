@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="large-12 columns" style="padding-left:10%">
+    <h1><b>Sign in with:</b></h1>
+    <form action="" method="post" name="login">
+        <h1><b><a href="{{url_for('oauth_authorize', provider='facebook')}}">Facebook</a></b></h1>
+        <h1><b><a href="{{url_for('oauth_authorize', provider='google')}}">Google</a></b></h1>
+    </form>
+</div>
+{% endblock %}

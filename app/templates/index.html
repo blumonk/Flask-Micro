@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="large-7 columns left">
+
+    <form action="" method="post" name="edit">
+        <div class="panel">
+            <div class="row">
+                {{form.hidden_tag()}}
+                <div class="large-9 columns">
+                {{form.post(size=40,maxlength=140,placeholder='Type your message here')}}
+                {% for error in form.post.errors %}
+                <p>{{error}}</p>
+                {% endfor %}
+                </div>
+                <div class="large-3 columns">
+                    <input class="button small" type="submit" value="Write">
+                </div>
+            </div>
+        </div>
+    </form>
+
+    {% if not posts.items %}
+        <div class="panel">
+        <h3><b>Welcome to micro!</b></h3><hr>
+        <h2 style="padding-left:1rem"><i class="fa fa-file-o" style="color:#99CCFF"></i> <small><b>Your feed is now empty</b></small></h2>
+        <h2 style="padding-left:1rem"><i class="fa fa-pencil-square" style="color:#99CCFF"></i> <small><b>Write something</b></small></h2>
+        <h2 style="padding-left:1rem"><i class="fa fa-plus-circle" style="color:#99CCFF"></i> <small><b>Follow your friends</b></small></h2>
+        <h2 style="padding-left:1rem"><i class="fa fa-smile-o" style="color:#99CCFF"></i> <small><b>Set your <a href="http://en.gravatar.com/">userpic</a></b></small></h2>
+        </div>
+    {% else %}
+        {% for post in posts.items %}
+            {% include 'post.html' %}
+        {% endfor %}
+        <div class="row">
+            <div class="large-6 columns">
+                {% if posts.has_prev %}
+                <h4 class="left subheader">
+                <a href="{{url_for('index',page=posts.prev_num)}}">prev</a>
+                </h4>
+                {% endif %}
+            </div>
+            <div class="large-6 columns">
+                {% if posts.has_next %}
+                <h4 class="right subheader">
+                <a href="{{url_for('index',page=posts.next_num)}}">Next</a>
+                </h4>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

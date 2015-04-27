@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="large-7 columns left">
+    <div class="row">
+        <div class="large-3 columns left">
+            <a href="http://en.gravatar.com/">
+            <img src="{{user.avatar(128)}}">
+            </a>
+            {% if user.id == current_user.id %}
+            <h4 style="text-align:center"><a href="{{url_for('edit')}}"><b>edit</b></a></h4>
+            {% elif not current_user.is_following(user) %}
+                <a href="{{url_for('follow', nickname = user.nickname)}}">Follow</a>
+            {% else %}
+                <a href="{{url_for('unfollow', nickname = user.nickname)}}">Unfollow</a>
+            {% endif %}
+        </div>
+        <div class="large-9 columns left">
+            <h3><b>nickname:</b> {{user.nickname}}</h3>
+            <h3><b>email:</b> {{user.email}}</h3>
+            {% if user.about_me %}
+            <div class="panel callout">
+            <p>{{user.about_me}}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+<hr>
+{% if not posts.items %}
+<div class="panel">
+    <h3>No posts yet</h3>  
+</div>
+{% else %}
+{% for post in posts.items %}
+    {% include 'post.html' %}
+{% endfor %}
+<div class="row">
+    <div class="large-6 columns">
+        {% if posts.has_prev %}
+        <h4 class="left subheader">
+        <a href="{{url_for('index',page=posts.prev_num)}}">prev</a>
+        </h4>
+        {% endif %}
+    </div>
+    <div class="large-6 columns">
+        {% if posts.has_next %}
+        <h4 class="right subheader">
+        <a href="{{url_for('index',page=posts.next_num)}}">Next</a>
+        </h4>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+</div>
+{% endblock %}
