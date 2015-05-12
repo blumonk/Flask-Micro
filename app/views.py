@@ -29,7 +29,7 @@ def index(page = 1):
             form = form,
             posts = posts)
 
-@app.route('/users')
+@app.route('/users/<int:page>')
 @login_required
 def users(page = 1):
     users_list = User.query.paginate(page, POSTS_PER_PAGE, False)
