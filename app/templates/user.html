@@ -11,9 +11,9 @@
             {% if user.id == current_user.id %}
             <h4 style="text-align:center"><a href="{{url_for('edit')}}"><b>edit</b></a></h4>
             {% elif not current_user.is_following(user) %}
-                <a href="{{url_for('follow', nickname = user.nickname)}}">Follow</a>
+                <a href="{{url_for('follow', nickname = user.nickname, secret_id = session.get('secret_key', 'nope'))}}">Follow</a>
             {% else %}
-                <a href="{{url_for('unfollow', nickname = user.nickname)}}">Unfollow</a>
+                <a href="{{url_for('unfollow', nickname = user.nickname, secret_id=session.get('secret_key', 'nope'))}}">Unfollow</a>
             {% endif %}
         </div>
         <div class="large-9 columns left">

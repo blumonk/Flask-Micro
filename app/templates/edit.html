@@ -13,7 +13,7 @@
     {{form.about_me(placeholder='About me')}}
     <hr>
     <div class="right">
-        <a href="{{url_for('delete_account', id=current_user.id)}}">Delete account</a>
+        <a href="{{url_for('delete_account', id=current_user.id, secret_id=session.get('secret_key', 'nope'))}}">Delete account</a>
     </div>
     <input class="button" type="submit" value="Save changes">
 </div>
